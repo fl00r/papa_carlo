@@ -30,17 +30,14 @@ module PapaCarlo
     @project_name = project
     @project_class = project.split("_").map(&:capitalize).join
 
-    path = File.expand_path("./../../#{project}/lib/#{project}.rb", __FILE__)
-    File.open(path, "w") do |f|
+    File.open("./#{project}/lib/#{project}.rb", "w") do |f|
       f << ERB.new(File.read(project_file)).result(binding)
     end
 
-    path = File.expand_path("./../../#{project}/config/boot.rb", __FILE__)
-    File.open(path, "w") do |f|
+    File.open("./#{project}/config/boot.rb", "w") do |f|
       f << ERB.new(File.read(boot)).result(binding)
     end
 
-    path = File.expand_path("./../../#{project}/config/options/config.yml", __FILE__)
-    FileUtils.touch(path)
+    FileUtils.touch("./#{project}/config/options/config.yml")
   end
 end
