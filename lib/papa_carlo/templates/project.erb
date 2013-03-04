@@ -1,0 +1,23 @@
+module <%= @project_class %>
+  extend self
+
+  def root
+    @root ||= begin
+      File.expand_path("../../", __FILE__)
+    end
+  end
+
+  CONFIG = File.join(root, "config", "options", "config.yml")
+
+  def logger
+    @logger ||= begin
+      logger = Logger.new(STDOUT)
+      logger.formatter = Logger::Formatter.new
+      logger
+    end
+  end
+
+  def config
+    @config ||= Configa.new(CONFIG)
+  end
+end

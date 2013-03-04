@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+BOOT_PATH = File.expand_path('../../config/boot',  __FILE__)
+require BOOT_PATH
+
+project = ARGV[0]
+if project
+  PapaCarlo.create_project(project)
+else
+  puts "USAGE: papa_carlo project_name"
+end
